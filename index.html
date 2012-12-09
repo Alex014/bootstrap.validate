@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Bootstrap validate</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
+    <script src="/js/jquery.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
+    <script src="/js/bootstrap.validate.js"></script>
+    <script src="/js/bootstrap.validate.en.js"></script>
+    
+<style>
+  fieldset {
+    width: 220px; 
+    padding: 18px;
+    margin: 200px auto 0px auto; 
+    border: 1px solid silver;
+    border-radius: 8px;
+  }
+  fieldset legend {
+    padding: 0px 12px 0px 12px;
+    border: 1px solid silver;
+    width: auto;
+    border-radius: 8px;
+  }
+  fieldset form {
+    margin: 0px; 
+  }
+  
+  .cHeader {
+    cursor: pointer;
+    font-weight: bold;
+  }
+  .cPanel {
+    cursor: pointer;
+    color: blue;
+    text-decoration: underline;
+    display: none;
+  }
+</style>
+    
+  </head>
+  <body>
+    
+
+<script type="text/javascript">
+$(document).ready(function() {
+  
+  $('.cHeader').click(function() {
+    $(this).next().slideToggle();
+  });
+  
+  $('.cPanel').click(function() {
+    $(this).slideToggle();
+  });
+    
+  $('#bt_form').bt_validate();
+
+  //Custom check function
+  $.bt_validate.method(
+    'custom_pass_eq', 
+    function(value) {
+      return ($('#pass').val() == $('#pass2').val());
+    },
+    "The passwords are not equal"
+  );  
+
+  //Ajax check function
+  $.bt_validate.method(
+      'usercheck', 
+      $.bt_validate.ajax_check({
+        url: '/usercheck.php', 
+        type: 'POST',
+        return_type: 'text',
+        get_data: function() { return {'email': $('#email').val()} }, 
+        get_success: function(res) { return (res == '1'); },
+        msg_ok: 'This email is free', 
+        msg_checking: 'Checking ...', 
+        msg_fail: 'This email is olready used'})
+    );
+    
+  $.bt_validate.after_validate = function(method, value, params, result) {
+    //this -> input field
+    //method -> validation method
+    //value -> value to validate; 
+    //params -> method params (between,5,7)
+    //result -> validation result (true or false)
+    console.log(this, method, value, params, result);
+  }
+});
+</script>
+
+
+<fieldset>
+    <legend>Bootstrap validate</legend>
+    <form method="post" id="bt_form">
+        <label for="required">Required</label>
+        <input name="required" id="required" type="text" validate="required"/>
+        <code> validate="required" </code>
+        
+        <label for="email">Email</label>
+        <input name="email" id="email" type="text" validate="email"/>
+        <code> validate="email" </code>
+        
+        <label for="www">WWW</label>
+        <input name="www" id="www" type="text" validate="www"/>
+        <code> validate="www" </code>
+        
+        <label for="date">Date</label>
+        <input name="date" id="date" type="text" validate="date"/>
+        <code> validate="date" </code>
+        
+        <label for="time">Time</label>
+        <input name="time" id="time" type="text" validate="time"/>
+        <code> validate="time" </code>
+        
+        <label for="datetime">Datetime</label>
+        <input name="datetime" id="datetime" type="text" validate="datetime"/>
+        <code> validate="datetime" </code>
+        
+        <label for="number">Number</label>
+        <input name="number" id="number" type="text" validate="number"/>
+        <code> validate="number" </code>
+        
+        <label for="float">Floating point number</label>
+        <input name="float" id="float" type="text" validate="float"/>
+        <code> validate="float" </code>
+        
+        <label for="equal5">Equal 5</label>
+        <input name="equal5" id="equal5" type="text" validate="equal,5"/>
+        <code> validate="equal,5" </code>
+        
+        <label for="min">Min 5</label>
+        <input name="min" id="min" type="text" validate="number|min,5"/>
+        <code> validate="number|min,5" </code>
+        
+        <label for="max">Max 5</label>
+        <input name="max" id="max" type="text" validate="number|max,5"/>
+        <code> validate="number|max,5" </code>
+
+        <label for="between">Floating point between 5 and 7</label>
+        <input name="between" id="between" type="text" validate="float|between,5,7"/>
+        <code> validate="float|between,5,7" </code>
+
+        <label for="length_between">Stringth length between 5 and 7</label>
+        <input name="length_between" id="length_between" type="text" validate="length_between,5,7"/>
+        <code> validate="length_between,5,7" </code>
+        
+        <label for="email">Ajax usercheck</label>
+        <input name="email" id="email" type="text" validate="required|email|usercheck"/>
+        <div class="cHeader">
+          This email are used: </br>
+        </div>
+        <div class="cPanel">
+          111@gmail.com </br>
+          123@gmail.com </br>
+          asd@gmail.com </br>
+          qwerty@gmail.com </br>
+          zxc@gmail.com </br>
+          user@gmail.com
+        </div>
+        <code> validate="required|email|usercheck" </code>
+        
+        <label for="pass">Password</label>
+        <input name="pass" id="pass" type="password" validate="length_min,5"/>
+        <code> validate="length_min,5" </code>
+        <label for="pass2">Repeat password</label>
+        <input name="pass2" id="pass2" type="password" validate="custom_pass_eq"/>
+        <code> validate="custom_pass_eq" </code>
+        
+        <input class="btn pull-right" type="submit" value="Submit" name="register"/>
+    </form>
+</fieldset>
+    
+  </body>
+</html>
