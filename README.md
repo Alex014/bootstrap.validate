@@ -6,7 +6,7 @@ BV is a validation plugin for twitter bootstrap
 #Custom
 
 ##Simple validation
- - HTML
+###HTML
 
     <form method="post" id="bt_form">
       <input name="name" type="text" validate="required"/>
@@ -15,19 +15,19 @@ BV is a validation plugin for twitter bootstrap
       <input name="address" type="text" validate="length_min,10"/>
       <input name="number" id="number" type="text" validate="float|between,5,7"/>
 
- - JS
+###JS
 
     $('#bt_form').bt_validate();
 
 ##Custom validation method
- - HTML
+###HTML
 
     <label for="pass">Password</label>
     <input name="pass" id="pass" type="password" validate="length_min,5"/>
     <label for="pass2">Repeat password</label>
     <input name="pass2" id="pass2" type="password" validate="custom_pass_eq"/>
 
- - JS
+###JS
 
     $.bt_validate.method(
       'custom_pass_eq', 
@@ -38,11 +38,11 @@ BV is a validation plugin for twitter bootstrap
     );
 
 ##Ajax validation
- - HTML
+###HTML
 
     <input name="email" id="email" type="text" validate="required|email|usercheck"/>
 
- - JS
+###JS
 
     $.bt_validate.method(
           'usercheck', 
