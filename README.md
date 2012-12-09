@@ -4,6 +4,10 @@
 BV is a validation plugin for twitter bootstrap
 It validates data and uses bootstrap tooltips
 
+One field can have multiple methods, methods are separated by '|'
+One method can have no, one or many parameters, they are separated by comas ','
+Example: validate="method1|method2,param1,param2"
+
 
 ##Simple validation
 ###HTML
@@ -20,21 +24,21 @@ It validates data and uses bootstrap tooltips
     $('#bt_form').bt_validate();
 
 ##Standart validation methods
- -required
- -email
- -www
- -date
- -time
- -datetime
- -number
- -float
- -equal
- -min
- -max
- -between
- -length_min
- -length_max
- -length_between
+  * required
+  * email
+  * www
+  * date
+  * time
+  * datetime
+  * number
+  * float
+  * equal
+  * min
+  * max
+  * between
+  * length_min
+  * length_max
+  * length_between
 
 ##Custom validation method
 ###HTML
@@ -47,7 +51,7 @@ It validates data and uses bootstrap tooltips
 ###JS
 
     $.bt_validate.method(
-     -custom_pass_eq', 
+      * custom_pass_eq', 
       function(value) {
         return ($('#pass').val() == $('#pass2').val());
       },
@@ -62,7 +66,7 @@ It validates data and uses bootstrap tooltips
 ###JS
 
     $.bt_validate.method(
-         -usercheck', 
+          * usercheck', 
           $.bt_validate.ajax_check({
             url: '/usercheck.php', 
             type: 'POST',
@@ -75,8 +79,8 @@ It validates data and uses bootstrap tooltips
     );
 
 Requires:
-  * jQuery - http://jquery.com/
-  * Bootstrap - http://twitter.github.com/bootstrap/
+  * jQuery  *  http://jquery.com/
+  * Bootstrap  *  http://twitter.github.com/bootstrap/
 
 ##License  
 Fuck the bureaucracy, I AM AN ANARCHIST !
