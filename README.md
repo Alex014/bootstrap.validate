@@ -8,6 +8,14 @@ One field can have multiple methods, methods are separated by '|'
 One method can have no, one or many parameters, they are separated by comas ','
 Example: validate="method1|method2,param1,param2"
 
+###Headers
+    <script src="/js/jquery.js"></script>
+
+    <script src="/js/bootstrap.min.js"></script>
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
+
+    <script src="/js/bootstrap.validate.js"></script>
+    <script src="/js/bootstrap.validate.en.js"></script>
 
 ##Simple validation
 ###HTML
