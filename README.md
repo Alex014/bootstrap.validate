@@ -3,7 +3,6 @@
 ##What is it
 BV is a validation plugin for twitter bootstrap
 
-#Custom
 
 ##Simple validation
 ###HTML
