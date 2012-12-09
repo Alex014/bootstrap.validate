@@ -19,6 +19,23 @@ It validates data and uses bootstrap tooltips
 
     $('#bt_form').bt_validate();
 
+##Standart validation methods
+ -required
+ -email
+ -www
+ -date
+ -time
+ -datetime
+ -number
+ -float
+ -equal
+ -min
+ -max
+ -between
+ -length_min
+ -length_max
+ -length_between
+
 ##Custom validation method
 ###HTML
 
@@ -30,7 +47,7 @@ It validates data and uses bootstrap tooltips
 ###JS
 
     $.bt_validate.method(
-      'custom_pass_eq', 
+     -custom_pass_eq', 
       function(value) {
         return ($('#pass').val() == $('#pass2').val());
       },
@@ -45,7 +62,7 @@ It validates data and uses bootstrap tooltips
 ###JS
 
     $.bt_validate.method(
-          'usercheck', 
+         -usercheck', 
           $.bt_validate.ajax_check({
             url: '/usercheck.php', 
             type: 'POST',
