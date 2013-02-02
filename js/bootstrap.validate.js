@@ -47,7 +47,9 @@ $.bt_validate.unblock = function() {
 }
 
 $.fn.bt_validate = function() {
-  $(this).children('input[validate],select[validate],textarea[validate]').blur(function() {
+  $.bt_validate.form = $(this);
+  
+  $.bt_validate.form.children('input[validate],select[validate],textarea[validate]').blur(function() {
     
     var validate_params = $(this).attr('validate').split('|');
     
@@ -105,13 +107,21 @@ $.fn.bt_validate = function() {
     }
   });
   
-  $(this).submit(function() {
+  $.bt_validate.form.submit(function() {
     $.bt_validate.result = true;
-    $('#regform').children('input[validate],select[validate],textarea[validate]').trigger('blur');
+    $.bt_validate.form.children('input[validate],select[validate],textarea[validate]').trigger('blur');
     
     if($.bt_validate.blocked) return false;
     return $.bt_validate.result;
   });
+}
+
+$.bt_validate.validate = function(params) {
+    $.bt_validate.result = true;
+    $.bt_validate.form.children('input[validate],select[validate],textarea[validate]').trigger('blur');
+    
+    if($.bt_validate.blocked) return false;
+    return $.bt_validate.result;
 }
 
 $.bt_validate.ajax_check = function(params) {
