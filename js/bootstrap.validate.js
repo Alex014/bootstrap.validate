@@ -14,9 +14,9 @@ $.bt_validate = {
 $.fn.show_tooltip = function(text, color) {
     $(this).tooltip('destroy');
     var rid = 'tlt_' + parseInt(new Date().getTime());
-    var marker = '<div id="'+rid+'"></div>';
+    var marker = '<div id="'+rid+'"</div>';
     $(this).tooltip(
-      {title: marker+text, trigger: 'manual', placement: 'right'});
+      {title: text+marker, html: true, trigger: 'manual', placement: 'right'});
     $(this).tooltip('show');
     $('#'+rid).parent().css({'background-color': color});
     $('#'+rid).parent().prev().css({'border-right-color': color});
