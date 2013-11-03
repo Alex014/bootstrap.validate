@@ -34,21 +34,26 @@ $.fn.hide_tooltip = function(text) {
     $(this).tooltip('destroy');
 }
 
-
-$.bt_validate.result = true;
-$.bt_validate.blocked = false;
+  $.bt_validate.result = {}
+  $.bt_validate.blocked = {}
 
 $.bt_validate.block = function() {
-  $.bt_validate.blocked = true;
+  $.bt_validate.blocked[$.bt_validate.form_id] = true;
 }
 
 $.bt_validate.unblock = function() {
-  $.bt_validate.blocked = false;
+  $.bt_validate.blocked[$.bt_validate.form_id] = false;
 }
 
 $.fn.bt_validate = function() {
   $.bt_validate.form = $(this);
+  $.bt_validate.form_id = $(this).attr('id');
+  $.bt_validate.result[$.bt_validate.form_id] = true;
+  $.bt_validate.blocked[$.bt_validate.form_id] = false;
+  
   $.bt_validate.form.find('input[validate],select[validate],textarea[validate]').blur(function() {
+    $.bt_validate.form = $(this.form)
+    $.bt_validate.form_id = this.form.id
     
     var validate_params = $(this).attr('validate').split('|');
     
@@ -80,7 +85,7 @@ $.fn.bt_validate = function() {
             $(this).show_err_tooltip(tl_text);
             
             field_result = false;
-            $.bt_validate.result = false;
+            $.bt_validate.result[$.bt_validate.form_id] = false;
             //After validate event
             if($.bt_validate.after_validate != null)
               $.bt_validate.after_validate.call($(this), fn_name, validate_param[0], validate_param.slice(1), false);
@@ -107,20 +112,23 @@ $.fn.bt_validate = function() {
   });
   
   $.bt_validate.form.submit(function() {
-    $.bt_validate.result = true;
+    $.bt_validate.form = $(this);
+    $.bt_validate.form_id = this.id;
+  
+    $.bt_validate.result[$.bt_validate.form_id] = true;
     $.bt_validate.form.find('input[validate],select[validate],textarea[validate]').trigger('blur');
-    
-    if($.bt_validate.blocked) return false;
-    return $.bt_validate.result;
+
+    if($.bt_validate.blocked[$.bt_validate.form_id]) return false;
+    return $.bt_validate.result[$.bt_validate.form_id];
   });
 }
 
 $.bt_validate.validate = function(params) {
-    $.bt_validate.result = true;
+    $.bt_validate.result[$.bt_validate.form_id] = true;
     $.bt_validate.form.find('input[validate],select[validate],textarea[validate]').trigger('blur');
     
-    if($.bt_validate.blocked) return false;
-    return $.bt_validate.result;
+    if($.bt_validate.blocked[$.bt_validate.form_id]) return false;
+    return $.bt_validate.result[$.bt_validate.form_id];
 }
 
 $.bt_validate.ajax_check = function(params) {

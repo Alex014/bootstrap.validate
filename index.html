@@ -56,6 +56,8 @@ $(document).ready(function() {
   });
     
   $('#bt_form').bt_validate();
+  $('#form_2').bt_validate();
+  $('#form_3').bt_validate();
 
   //Custom check function
   $.bt_validate.method(
@@ -97,6 +99,10 @@ $(document).ready(function() {
     <form method="post" id="bt_form">
         <label for="required">Required</label>
         <input name="required" id="required" type="text" validate="required"/>
+        <code> validate="required" </code>
+        
+        <label for="required">Required (file)</label>
+        <input name="file" id="file" type="file" validate="required"/>
         <code> validate="required" </code>
         
         <label for="email">Email</label>
@@ -173,5 +179,28 @@ $(document).ready(function() {
     </form>
 </fieldset>
     
+
+<fieldset>
+    <legend>Form #2</legend>
+<form method="post" id="form_2">
+        <label for="required">Required</label>
+        <input name="required" id="required" type="text" validate="required"/>
+        <code> validate="required" </code>
+  
+        <input class="btn pull-right" type="submit" value="Submit" name="submit"/>
+</form>
+</fieldset>
+
+<fieldset>
+    <legend>Form #3</legend>
+<form method="post" id="form_3">
+        <label for="required">Required</label>
+        <input name="required" id="required" type="text" validate="required"/>
+        <code> validate="required" </code>
+  
+        <input class="btn pull-right" type="submit" value="Submit" name="submit"/>
+</form>
+</fieldset>
+
   </body>
 </html>
