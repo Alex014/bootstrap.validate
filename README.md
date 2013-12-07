@@ -31,7 +31,7 @@ Example: validate="method1|method2,param1,param2"
 
     $('#bt_form').bt_validate();
 
-##Standart validation methods
+##Standard validation methods
   * required
   * email
   * www
